@@ -10,55 +10,42 @@
   <!-- 1) Simple Iframe Embed -->
 <!-- Add this button to your website -->
 <!-- Add this script to your website -->
+<!-- Add this button to your website -->
+<button id="open-chat-widget" style="position:fixed; bottom:20px; right:20px; background:linear-gradient(to right, #3b82f6, #ec4899); color:white; border:none; border-radius:9999px; width:50px; height:50px; display:flex; align-items:center; justify-center; cursor:pointer; box-shadow:0 4px 6px rgba(0,0,0,0.1);">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+</button>
+
+<!-- Add this script to your website -->
 <script>
-(function() {
-  // Create widget container
-  var container = document.createElement('div');
-  container.id = 'ai-chat-widget-container';
-  container.style.cssText = 'position:fixed; bottom:20px; right:20px; z-index:9999; display:none;';
-  
-  // Create widget iframe
-  var iframe = document.createElement('iframe');
-  iframe.src = 'http://localhost:5300/widget/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiNjMzZmJlOWI2ZTMzNWQxZGMzOTljMWRlOWNmZDA0M2Q6OTQ1NWRkYjU3MjMzNGIyOTFhY2IwYmY5MzEzNmRkMzJlMjgyMTZhM2I4YzExNjM1OWE3YWVkYzdmOGU4YWNhMmMwZjY3Y2ExYjg3MTE1Njc5NTU2M2Q1MDgxZDBiMWE0ZmMyNjhlNTg1NTc1MDBmZjA4MjlhNDI3NTQ0NWU4ZDY3NWI3NGU3NTcyM2IwNmFhYmYyNTNmYjI1Yjc0NWNmMTI5YzEzMjYwMjQ1NDRhNjQ2YTlmMzIyZjg1MGZjYWI3ODcxMWI5Nzc3YzljNzkyODJkN2NmMGRhNWM2NWU3IiwiaWF0IjoxNzQxNjM1OTY0fQ.zYJScJsca3QVhUrKjNvUFaIWufxnkAPOuObtA77ROJ8';
-  iframe.style.cssText = 'width:350px; height:600px; border:none; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);';
-  container.appendChild(iframe);
-  
-  // Create toggle button
-  var button = document.createElement('button');
-  button.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-    </svg>
-  `;
-  button.style.cssText = 'position:fixed; bottom:20px; right:20px; width:50px; height:50px; border-radius:50%; border:none; cursor:pointer; background:linear-gradient(135deg, #3b82f6, #8b5cf6); color:white; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,0.15); transition:transform 0.2s;';
-  
-  // Add hover effect
-  button.onmouseover = function() { this.style.transform = 'scale(1.1)'; };
-  button.onmouseout = function() { this.style.transform = 'scale(1)'; };
-  
-  // Toggle widget visibility
-  var isOpen = false;
-  button.onclick = function() {
-    isOpen = !isOpen;
-    container.style.display = isOpen ? 'block' : 'none';
-    button.innerHTML = isOpen ? 
-      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>' :
-      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
-  };
-  
-  // Add elements to page
-  document.body.appendChild(container);
-  document.body.appendChild(button);
+  document.getElementById('open-chat-widget').addEventListener('click', function() {
+    // Create iframe if it doesn't exist
+    if (!document.getElementById('chat-widget-iframe')) {
+      const iframe = document.createElement('iframe');
+      iframe.id = 'chat-widget-iframe';
+      iframe.src = 'http://localhost:5300/widget/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiNjMzZmJlOWI2ZTMzNWQxZGMzOTljMWRlOWNmZDA0M2Q6OTQ1NWRkYjU3MjMzNGIyOTFhY2IwYmY5MzEzNmRkMzJlMjgyMTZhM2I4YzExNjM1OWE3YWVkYzdmOGU4YWNhMmMwZjY3Y2ExYjg3MTE1Njc5NTU2M2Q1MDgxZDBiMWE0ZmMyNjhlNTg1NTc1MDBmZjA4MjlhNDI3NTQ0NWU4ZDY3NWI3NGU3NTcyM2IwNmFhYmYyNTNmYjI1Yjc0NWNmMTI5YzEzMjYwMjQ1NDRhNjQ2YTlmMzIyZjg1MGZjYWI3ODcxMWI5Nzc3YzljNzkyODJkN2NmMGRhNWM2NWU3IiwiaWF0IjoxNzQxNjM1OTY0fQ.zYJScJsca3QVhUrKjNvUFaIWufxnkAPOuObtA77ROJ8';
+      iframe.style.position = 'fixed';
+      iframe.style.bottom = '20px';
+      iframe.style.right = '20px';
+      iframe.style.width = '300px';
+      iframe.style.height = '500px';
+      iframe.style.border = 'none';
+      iframe.style.zIndex = '9999';
+      iframe.allow = 'microphone';
+      document.body.appendChild(iframe);
+    } else {
+      // Toggle visibility
+      const iframe = document.getElementById('chat-widget-iframe');
+      iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
+    }
+  });
   
   // Listen for close message from iframe
   window.addEventListener('message', function(event) {
     if (event.data.type === 'CLOSE_WIDGET') {
-      isOpen = false;
-      container.style.display = 'none';
-      button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
+      const iframe = document.getElementById('chat-widget-iframe');
+      if (iframe) iframe.style.display = 'none';
     }
   });
-})();
 </script>
   <!-- 2) Or Use the Popup Button Code -->
   <!-- 
