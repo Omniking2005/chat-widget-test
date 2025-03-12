@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Test Chat Widget</title>
+</head>
+<body>
+  <h1>Embedding Our Chat Widget</h1>
+  
+  <!-- 1) Simple Iframe Embed -->
+<iframe src="http://localhost:5300/widget/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiNjMzZmJlOWI2ZTMzNWQxZGMzOTljMWRlOWNmZDA0M2Q6OTQ1NWRkYjU3MjMzNGIyOTFhY2IwYmY5MzEzNmRkMzJlMjgyMTZhM2I4YzExNjM1OWE3YWVkYzdmOGU4YWNhMmMwZjY3Y2ExYjg3MTE1Njc5NTU2M2Q1MDgxZDBiMWE0ZmMyNjhlNTg1NTc1MDBmZjA4MjlhNDI3NTQ0NWU4ZDY3NWI3NGU3NTcyM2IwNmFhYmYyNTNmYjI1Yjc0NWNmMTI5YzEzMjYwMjQ1NDRhNjQ2YTlmMzIyZjg1MGZjYWI3ODcxMWI5Nzc3YzljNzkyODJkN2NmMGRhNWM2NWU3IiwiaWF0IjoxNzQxNjM1OTY0fQ.zYJScJsca3QVhUrKjNvUFaIWufxnkAPOuObtA77ROJ8" style="width:300px; height:500px; border:none;" allow="microphone"></iframe>
+  
+  <!-- 2) Or Use the Popup Button Code -->
+  <!-- 
+  <button id="open-chat-widget">
+    Open Chat
+  </button>
+  <script>
+    document.getElementById('open-chat-widget').addEventListener('click', function() {
+      if (!document.getElementById('chat-widget-iframe')) {
+        const iframe = document.createElement('iframe');
+        iframe.id = 'chat-widget-iframe';
+        iframe.src = 'https://myapp.com/widget?token=XYZ';
+        iframe.style.position = 'fixed';
+        iframe.style.bottom = '20px';
+        iframe.style.right = '20px';
+        iframe.style.width = '300px';
+        iframe.style.height = '500px';
+        iframe.style.border = 'none';
+        iframe.style.zIndex = '9999';
+        iframe.allow = 'microphone';
+        document.body.appendChild(iframe);
+      } else {
+        // Toggle visibility
+        const iframe = document.getElementById('chat-widget-iframe');
+        iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
+      }
+    });
+    
+    // Listen for close message from widget
+    window.addEventListener('message', function(event) {
+      if (event.data.type === 'CLOSE_WIDGET') {
+        const iframe = document.getElementById('chat-widget-iframe');
+        if (iframe) iframe.style.display = 'none';
+      }
+    });
+  </script>
+  -->
+
+</body>
+</html>
