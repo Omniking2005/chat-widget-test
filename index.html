@@ -7,45 +7,62 @@
 <body>
   <h1>Embedding Our Chat Widget</h1>
   
-  <!-- Popup Button -->
-  <button id="open-chat-widget" style="
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:linear-gradient(to right, #3b82f6, #ec4899);
-    color:white;
-    border:none;
-    border-radius:9999px;
-    width:50px;
-    height:50px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    box-shadow:0 4px 6px rgba(0,0,0,0.1);
-  ">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round">
+  <!-- Floating Button -->
+  <button
+    id="open-chat-widget"
+    style="
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(to right, #3b82f6, #ec4899);
+      color: white;
+      border: none;
+      border-radius: 9999px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 9999;
+    "
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
     </svg>
   </button>
 
-  <!-- Popup Script -->
+  <!-- Script to create / toggle the Chat Widget iFrame -->
   <script>
     document.getElementById('open-chat-widget').addEventListener('click', function() {
-      // Create iframe if it doesn't exist
-      if (!document.getElementById('chat-widget-iframe')) {
-        const iframe = document.createElement('iframe');
+      // Check if iframe already exists
+      let iframe = document.getElementById('chat-widget-iframe');
+      if (!iframe) {
+        iframe = document.createElement('iframe');
         iframe.id = 'chat-widget-iframe';
-        iframe.src = 'http://localhost:5300/widget/eyJhbGciOiJIUzI1NiIs...'; // your token
+        // Replace with your actual widget URL + token
+        iframe.src = 'http://localhost:5300/widget/eyJhbGciOiJIUzI1NiIs...';
+        
+        /* Position & Sizing */
         iframe.style.position = 'fixed';
-        iframe.style.top = '20px';
+        iframe.style.bottom = '20px';
         iframe.style.right = '20px';
-        /* Updated dimensions */
-        iframe.style.width = '800px';
-        iframe.style.height = '600px';
+        // Flexible: fill most of the viewport, but cap at a max
+        iframe.style.width = '90vw';
+        iframe.style.height = '90vh';
+        iframe.style.maxWidth = '600px';
+        iframe.style.maxHeight = '700px';
 
         iframe.style.border = 'none';
         iframe.style.zIndex = '9999';
@@ -53,12 +70,11 @@
         document.body.appendChild(iframe);
       } else {
         // Toggle visibility
-        const iframe = document.getElementById('chat-widget-iframe');
         iframe.style.display = (iframe.style.display === 'none') ? 'block' : 'none';
       }
     });
-    
-    // Listen for close message from iframe
+
+    // Listen for a CLOSE_WIDGET message from the iframe
     window.addEventListener('message', function(event) {
       if (event.data.type === 'CLOSE_WIDGET') {
         const iframe = document.getElementById('chat-widget-iframe');
